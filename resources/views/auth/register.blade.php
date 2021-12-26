@@ -1,60 +1,66 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+@extends('..layouts.master')
+@section('bodySection')
+<!-- Info Section -->
+<div class="login-section">
+    <div class="image-layer" style="background-image: url({{ asset('assets/images/background/12.jpg') }});"></div>
+    <div class="outer-box">
+         <!-- Login Form -->
+        <div class="login-form default-form">
+            <div class="form-inner">
+                <h3>Register to Superio</h3>
+                <!--Register Form-->
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name" value="{{ __('Name') }}">Name</label>
+                        <input id="name" type="text" name="name" :value="old('name')" placeholder="Enter your name" required autocomplete="name">
+                    </div>
 
-        <x-jet-validation-errors class="mb-4" />
+                    <div class="form-group">
+                        <label for="email" value="{{ __('Email') }}">Email</label>
+                        <input id="email" class="block mt-1 w-full" type="email" name="email" placeholder="Enter your email" required >
+                    </div>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+                    <div class="form-group">
+                        <label for="password" value="{{ __('Password') }}">Password</label>
+                        <input id="password" class="block mt-1 w-full" type="password" name="password" required placeholder="Password" autocomplete="new-password" >
+                    </div>
 
-            <div>
-                <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
+                    <div class="form-group">
+                        <label for="password_confirmation" value="{{ __('Confirm Password') }}">Confirm Password</label>
+                        <input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required placeholder="Confirm Password" autocomplete="new-password">
+                    </div>
 
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-jet-label for="terms">
-                        <div class="flex items-center">
-                            <x-jet-checkbox name="terms" id="terms"/>
-
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
-                                ]) !!}
+                    <div class="form-group">
+                        <div class="field-outer">
+                            <div class="input-group checkboxes square">
+                                <input id="remember_me" type="checkbox" name="remember-me" value="" id="remember">
+                                <label for="remember_me" class="remember"><span class="custom-checkbox"></span> Remember me</label>
                             </div>
+                                <a href="{{ route('login') }}" class="pwd">Already registered?</a>
                         </div>
-                    </x-jet-label>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="theme-btn btn-style-one" type="submit" name="log-in">Register</button>
+                    </div>
+                </form>
+
+                <div class="bottom-box">
+                    <div class="divider"><span>or</span></div>
+                    <div class="btn-box row">
+                        <div class="col-lg-6 col-md-12">
+                            <a href="#" class="theme-btn social-btn-two facebook-btn"><i class="fab fa-facebook-f"></i> Log In via Facebook</a>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <a href="#" class="theme-btn social-btn-two google-btn"><i class="fab fa-google"></i> Log In via Gmail</a>
+                        </div>
+                    </div>
                 </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
             </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+        </div>
+        <!--End Login Form -->
+    </div>
+</div>
+<!-- End Info Section -->
+@endsection

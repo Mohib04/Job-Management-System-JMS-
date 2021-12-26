@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\frontend\JobController;
+use App\Http\Controllers\frontend\EmployerController;
+use App\Http\Controllers\frontend\CandidateController;
+use App\Http\Controllers\frontend\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +17,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Home
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.frontend.home.home');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+//Jobs
+Route::resource('job', JobController::class);
+
+//Employer
+Route::resource('employer', EmployerController::class);
+
+//Candidate
+Route::resource('candidate', CandidateController::class);
+
+//Blog
+Route::resource('blog', BlogController::class);
