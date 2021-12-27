@@ -7,7 +7,17 @@
          <!-- Login Form -->
         <div class="login-form default-form">
             <div class="form-inner">
-                <h3>Login to Superio</h3>
+
+                @if (session('status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>
+                            {{ session('status') }}
+                        </strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <h3>Login to JMS</h3>
                 <!--Login Form-->
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

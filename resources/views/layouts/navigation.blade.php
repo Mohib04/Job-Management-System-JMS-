@@ -1,5 +1,5 @@
 <!-- Main Header-->
-<header class="main-header header-style-two bg-success bg-gradient">
+<header style="background: white" class="main-header header-style-two ">
     <div class="auto-container">
         <!-- Main box -->
         <div class="main-box">
@@ -39,9 +39,10 @@
 
 
                         <!-- Only for Mobile View -->
-                        <li class="mm-add-listing">
-                            <a href="dashboard" class="theme-btn btn-style-one">Dashboard</a>
-                            <span>
+                        @if (Auth::check())
+                            <li class="mm-add-listing">
+                                <a href="dashboard" class="theme-btn btn-style-one">Dashboard</a>
+                                <span>
                                     <span class="contact-info">
                                         <span class="phone-num"><span>Call us</span><a href="tel:1234567890">123 456 7890</a></span>
                                         <span class="address">329 Queensberry Street, North Melbourne VIC <br>3051, Australia.</span>
@@ -54,7 +55,8 @@
                                         <a href="#"><span class="fab fa-linkedin-in"></span></a>
                                     </span>
                                 </span>
-                        </li>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- Main Menu End-->

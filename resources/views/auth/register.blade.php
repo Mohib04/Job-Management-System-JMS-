@@ -7,7 +7,7 @@
          <!-- Login Form -->
         <div class="login-form default-form">
             <div class="form-inner">
-                <h3>Register to Superio</h3>
+                <h3>Register to JMS</h3>
                 <!--Register Form-->
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
