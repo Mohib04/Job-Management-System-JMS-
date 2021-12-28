@@ -4,6 +4,9 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Hash;
+use Auth;
 
 class UpdatePassController extends Controller
 {
@@ -35,7 +38,23 @@ class UpdatePassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $updateData = $request->validate([
+            'oldpassword' => 'required',
+            'password'    => 'required|confirmed'
+        ]);
+
+        $hashedPassword = Auth::user()->password;
+        if(Hash::check($request->oldpassword, $hashedPassword)){
+            $user = User::find(Auth::id());
+            $user->password = Hash::make( $request->password);
+            $user->save();
+            Auth::logout();
+            return redirect()->route('login')->with('status', "password Is Change Successfully !!");
+        }
+        else{
+            return redirect()->back()->with('status', 'Current Password is Invalid');
+        }
+
     }
 
     /**
